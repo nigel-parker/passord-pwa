@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Passordgenerator - Generer sikre passord">
+    <meta name="theme-color" content="#2196F3">
+    <title>Passordgenerator</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="icon-192.png">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Passordgenerator</h1>
+            <p class="subtitle">Generer lett-å-huske passord</p>
+        </header>
+
+        <main>
+            <div class="control-panel">
+                <button id="generateBtn" class="btn-primary">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/>
+                    </svg>
+                    Generer passord
+                </button>
+                <label class="count-label">
+                    Antall:
+                    <select id="countSelect">
+                        <option value="5" selected>5</option>
+                        <option value="10">10</option>
+                        <option value="15">15</option>
+                        <option value="20">20</option>
+                    </select>
+                </label>
+            </div>
+
+            <div id="passwordList" class="password-list"></div>
+
+            <div id="installPrompt" class="install-prompt" style="display: none;">
+                <p>Installer denne appen for rask tilgang!</p>
+                <button id="installBtn" class="btn-install">Installer</button>
+                <button id="dismissBtn" class="btn-dismiss">Senere</button>
+            </div>
+        </main>
+
+        <footer>
+            <p class="footer-text">Klikk på et passord for å kopiere</p>
+        </footer>
+    </div>
+
+    <script src="passord.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
