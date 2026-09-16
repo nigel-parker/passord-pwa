@@ -2,11 +2,19 @@
 
 let deferredPrompt;
 
-// Register service worker
+// Register service worker and reload once a new version takes over
 if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('sw.js')
         .then(reg => console.log('Service Worker registered', reg))
         .catch(err => console.log('Service Worker registration failed', err));
+
+    let hadController = Boolean(navigator.serviceWorker.controller);
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+        if (hadController) {
+            window.location.reload();
+        }
+        hadController = true;
+    });
 }
 
 // Handle install prompt

@@ -33,7 +33,7 @@ Load order in `index.html` matters: `passord.js`, `nokler.js`, `app.js`, `nokler
 
 - `passord.js` – pure password logic, ported from a Groovy original. A password is `Piece1 + Piece2 + '13---'`, where Piece1 is Consonant(upper)+Vowel+Consonant+Vowel and Piece2 is ConsonantPair+Vowel+Consonant. Consonant/vowel/pair alphabets are hardcoded here.
 - `nokler.js` – pure CSV parser (`parseCsv`, `parseNokler`), no DOM access. Wrapped in an IIFE that assigns to `globalThis` in the browser and `module.exports` under Node, so `nokler.test.js` can `require` it. Keep it DOM-free.
-- `app.js` – DOM wiring: service worker registration, `beforeinstallprompt` install banner, tab switching (active tab remembered in localStorage), rendering the password list, and click-to-copy with an `execCommand` fallback for iOS/non-HTTPS.
+- `app.js` – DOM wiring: service worker registration (with auto-reload on `controllerchange`, so a new deploy shows after one load), `beforeinstallprompt` install banner, tab switching (active tab remembered in localStorage), rendering the password list, and click-to-copy with an `execCommand` fallback for iOS/non-HTTPS.
 - `nokler-ui.js` – fetches `nokler.csv`, parses it and renders the Nøkler tab.
 - `sw.js` – service worker. Cache-first for everything except `nokler.csv`, which is network-first with cache fallback. `urlsToCache` lists every asset to precache.
 - `manifest.json` – PWA metadata; the two PNG icons are generated from `icon.svg`.
@@ -46,4 +46,4 @@ Because the service worker fetches this file network-first, changing only the CS
 
 ## Service worker cache versioning
 
-`CACHE_NAME` in `sw.js` (currently `passord-v4`) must be bumped whenever any cached code asset changes (HTML, CSS, JS, manifest, icons). Those are served cache-first, so without a bump installed clients keep serving the old files. The activate handler deletes all caches whose name differs from `CACHE_NAME`. If you add a new static asset, also add it to `urlsToCache`. Test files are not cached and not loaded by `index.html`.
+`CACHE_NAME` in `sw.js` (currently `passord-v5`) must be bumped whenever any cached code asset changes (HTML, CSS, JS, manifest, icons). Those are served cache-first, so without a bump installed clients keep serving the old files. The activate handler deletes all caches whose name differs from `CACHE_NAME`. If you add a new static asset, also add it to `urlsToCache`. Test files are not cached and not loaded by `index.html`.
