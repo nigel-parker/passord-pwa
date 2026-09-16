@@ -9,6 +9,7 @@ En Progressive Web App for å generere lett-å-huske passord.
 - 🎨 Responsivt design
 - 📋 Klikk for å kopiere passord
 - ⚡ Rask og lett
+- 🔑 Oversikt over fysiske nøkler fra `nokler.csv`
 
 ## Oppsett
 
@@ -84,7 +85,11 @@ passord-pwa/
 ├── index.html          # Hovedside
 ├── styles.css          # Styling
 ├── passord.js          # Passordlogikk
-├── app.js              # App-logikk og PWA-håndtering
+├── nokler.js           # CSV-parser for nøkler
+├── nokler-ui.js        # Viser nøkkeloversikten
+├── nokler.csv          # Nøkkeldata (rediger denne)
+├── nokler.test.js      # Tester (node --test)
+├── app.js              # App-logikk, faner og PWA-håndtering
 ├── sw.js               # Service Worker (offline-funksjonalitet)
 ├── manifest.json       # PWA metadata
 ├── icon.svg            # Ikon-mal
@@ -99,6 +104,28 @@ passord-pwa/
 2. Klikk 'Generer passord' for å lage nye passord
 3. Velg antall passord fra nedtrekkslisten
 4. Klikk på et passord for å kopiere det til utklippstavlen
+
+### Nøkler
+
+Fanen «Nøkler» viser innholdet i `nokler.csv`. Rediger filen, commit og push, så oppdateres appen ved neste lasting.
+
+```csv
+navn,beskrivelse
+Hovednøkkel,Ytterdør hjemme
+Hytta,"Nøkkelknippe med tre nøkler:
+- Ytterdør
+- Anneks
+- Bod
+Henger i skapet i gangen."
+```
+
+Beskrivelsen kan settes i anførselstegn og gå over flere linjer. Merk at repoet er offentlig, så ikke legg inn sensitiv informasjon.
+
+## Tester
+
+```bash
+node --test
+```
 
 ## Teknologi
 

@@ -30,6 +30,15 @@ document.getElementById('dismissBtn')?.addEventListener('click', () => {
     document.getElementById('installPrompt').style.display = 'none';
 });
 
+// Tab switching
+function showTab(name) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === name));
+    document.querySelectorAll('.tab-section').forEach(s => s.classList.toggle('active', s.id === 'tab-' + name));
+    localStorage.setItem('activeTab', name);
+}
+
+document.querySelectorAll('.tab-btn').forEach(b => b.addEventListener('click', () => showTab(b.dataset.tab)));
+
 // Password generation and display
 function displayPasswords(count) {
     const passwordList = document.getElementById('passwordList');
@@ -109,5 +118,6 @@ document.getElementById('generateBtn')?.addEventListener('click', () => {
 
 // Generate initial passwords on load
 window.addEventListener('load', () => {
+    showTab(localStorage.getItem('activeTab') || 'passord');
     displayPasswords(5);
 });

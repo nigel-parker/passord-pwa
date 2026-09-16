@@ -17,26 +17,39 @@
             <p class="subtitle">Generer lett-å-huske passord</p>
         </header>
 
-        <main>
-            <div class="control-panel">
-                <button id="generateBtn" class="btn-primary">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/>
-                    </svg>
-                    Generer passord
-                </button>
-                <label class="count-label">
-                    Antall:
-                    <select id="countSelect">
-                        <option value="5" selected>5</option>
-                        <option value="10">10</option>
-                        <option value="15">15</option>
-                        <option value="20">20</option>
-                    </select>
-                </label>
-            </div>
+        <nav class="tabs">
+            <button class="tab-btn active" data-tab="passord">Passord</button>
+            <button class="tab-btn" data-tab="nokler">Nøkler</button>
+        </nav>
 
-            <div id="passwordList" class="password-list"></div>
+        <main>
+            <section id="tab-passord" class="tab-section active">
+                <div class="control-panel">
+                    <button id="generateBtn" class="btn-primary">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/>
+                        </svg>
+                        Generer passord
+                    </button>
+                    <label class="count-label">
+                        Antall:
+                        <select id="countSelect">
+                            <option value="5" selected>5</option>
+                            <option value="10">10</option>
+                            <option value="15">15</option>
+                            <option value="20">20</option>
+                        </select>
+                    </label>
+                </div>
+
+                <div id="passwordList" class="password-list"></div>
+                <p class="footer-text">Klikk på et passord for å kopiere</p>
+            </section>
+
+            <section id="tab-nokler" class="tab-section">
+                <div id="keyList" class="password-list"></div>
+                <p id="keysStatus" class="footer-text"></p>
+            </section>
 
             <div id="installPrompt" class="install-prompt" style="display: none;">
                 <p>Installer denne appen for rask tilgang!</p>
@@ -45,12 +58,11 @@
             </div>
         </main>
 
-        <footer>
-            <p class="footer-text">Klikk på et passord for å kopiere</p>
-        </footer>
     </div>
 
     <script src="passord.js"></script>
+    <script src="nokler.js"></script>
     <script src="app.js"></script>
+    <script src="nokler-ui.js"></script>
 </body>
 </html>

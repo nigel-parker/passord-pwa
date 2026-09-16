@@ -1,10 +1,13 @@
-const CACHE_NAME = 'passord-v3';
+const CACHE_NAME = 'passord-v4';
 const urlsToCache = [
     './',
     'index.html',
     'styles.css',
     'passord.js',
     'app.js',
+    'nokler.js',
+    'nokler-ui.js',
+    'nokler.csv',
     'manifest.json',
     'icon-192.png',
     'icon-512.png'
@@ -25,8 +28,21 @@ self.addEventListener('install', event => {
     );
 });
 
-// Fetch from cache, fallback to network
+// nokler.csv is network-first so a redeploy updates it without a cache bump.
+// Everything else is cache-first.
 self.addEventListener('fetch', event => {
+    if (event.request.url.endsWith('nokler.csv')) {
+        event.respondWith(
+            fetch(event.request)
+                .then(response => {
+                    const copy = response.clone();
+                    caches.open(CACHE_NAME).then(cache => cache.put(event.request, copy));
+                    return response;
+                })
+                .catch(() => caches.match(event.request))
+        );
+        return;
+    }
     event.respondWith(
         caches.match(event.request)
             .then(response => {
