@@ -110,16 +110,15 @@ passord-pwa/
 Fanen «Nøkler» viser innholdet i `nokler.csv`. Rediger filen, commit og push, så oppdateres appen ved neste lasting.
 
 ```csv
-navn,beskrivelse
-Hovednøkkel,Ytterdør hjemme
-Hytta,"Nøkkelknippe med tre nøkler:
+navn;beskrivelse
+1;Postkassen (2 nøkler)
+2;"Nøkkelknippe med tre nøkler:
 - Ytterdør
 - Anneks
-- Bod
-Henger i skapet i gangen."
+- Bod"
 ```
 
-Beskrivelsen kan settes i anførselstegn og gå over flere linjer. Merk at repoet er offentlig, så ikke legg inn sensitiv informasjon.
+Skilletegn kan være semikolon (norsk Excel) eller komma; det leses fra overskriftslinjen. Beskrivelsen kan settes i anførselstegn og gå over flere linjer. Merk at repoet er offentlig, så ikke legg inn sensitiv informasjon.
 
 ## Tester
 

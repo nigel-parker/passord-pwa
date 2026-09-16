@@ -40,7 +40,7 @@ Load order in `index.html` matters: `passord.js`, `nokler.js`, `app.js`, `nokler
 
 ## Key data: nokler.csv
 
-The key overview is edited by hand in `nokler.csv` and deployed by committing and pushing. Format: header row `navn,beskrivelse`, comma-separated, UTF-8. A field may be double-quoted, and a quoted field may contain commas, line breaks and `""` for a literal quote. Line breaks inside the description are shown in the app. Rows are displayed in file order. Rows with an empty `navn` are skipped.
+The key overview is edited by hand in `nokler.csv` and deployed by committing and pushing. Format: header row `navn;beskrivelse`, UTF-8. The delimiter is detected from the header line: semicolon if present (Norwegian Excel default), otherwise comma. A field may be double-quoted, and a quoted field may contain commas, line breaks and `""` for a literal quote. Line breaks inside the description are shown in the app. Rows are displayed in file order. Rows with an empty `navn` are skipped.
 
 Because the service worker fetches this file network-first, changing only the CSV does not require a cache bump. The repo is served publicly from GitHub Pages, so keep the contents non-sensitive.
 

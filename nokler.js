@@ -1,7 +1,13 @@
 // CSV parsing for the key overview. No DOM access, so it also loads under Node for tests.
 
 (function (root) {
+    function detectDelimiter(text) {
+        const header = text.split(/\r?\n/, 1)[0];
+        return header.includes(';') && !header.includes(',') ? ';' : ',';
+    }
+
     function parseCsv(text) {
+        const delimiter = detectDelimiter(text);
         const records = [];
         let fields = [];
         let field = '';
@@ -39,7 +45,7 @@
             } else if (ch === '"') {
                 inQuotes = true;
                 wasQuoted = true;
-            } else if (ch === ',') {
+            } else if (ch === delimiter) {
                 endField();
             } else if (ch === '\n') {
                 endRecord();

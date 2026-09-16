@@ -55,3 +55,18 @@ test('parseNokler ignores extra columns', () => {
         { navn: 'Bod', beskrivelse: 'Kjeller' }
     ]);
 });
+
+test('parseCsv uses semicolon when the header line contains semicolons', () => {
+    assert.deepEqual(parseCsv('navn;beskrivelse\n1;Postkassen, 2 nøkler'), [
+        ['navn', 'beskrivelse'],
+        ['1', 'Postkassen, 2 nøkler']
+    ]);
+});
+
+test('parseNokler handles semicolon-separated files with quoted fields', () => {
+    const text = 'navn;beskrivelse\r\n17;"Bilnøkkel, garasjen"\r\n18;\r\n';
+    assert.deepEqual(parseNokler(text), [
+        { navn: '17', beskrivelse: 'Bilnøkkel, garasjen' },
+        { navn: '18', beskrivelse: '' }
+    ]);
+});
