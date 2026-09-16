@@ -31,7 +31,7 @@ async function loadNokler() {
     const status = document.getElementById('keysStatus');
     status.textContent = 'Laster…';
     try {
-        const response = await fetch('nokler.csv');
+        const response = await fetch('nokler.csv', { cache: 'no-cache' });
         if (!response.ok) {
             throw new Error(`HTTP ${response.status}`);
         }

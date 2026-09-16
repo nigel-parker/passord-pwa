@@ -1,4 +1,4 @@
-const CACHE_NAME = 'passord-v5';
+const CACHE_NAME = 'passord-v6';
 const urlsToCache = [
     './',
     'index.html',
@@ -29,11 +29,12 @@ self.addEventListener('install', event => {
 });
 
 // nokler.csv is network-first so a redeploy updates it without a cache bump.
-// Everything else is cache-first.
+// cache: 'no-cache' bypasses the browser HTTP cache (Pages sends max-age=600)
+// and revalidates with the server. Everything else is cache-first.
 self.addEventListener('fetch', event => {
     if (event.request.url.endsWith('nokler.csv')) {
         event.respondWith(
-            fetch(event.request)
+            fetch(event.request, { cache: 'no-cache' })
                 .then(response => {
                     const copy = response.clone();
                     caches.open(CACHE_NAME).then(cache => cache.put(event.request, copy));

@@ -42,8 +42,8 @@ Load order in `index.html` matters: `passord.js`, `nokler.js`, `app.js`, `nokler
 
 The key overview is edited by hand in `nokler.csv` and deployed by committing and pushing. Format: header row `navn;beskrivelse`, UTF-8. The delimiter is detected from the header line: semicolon if present (Norwegian Excel default), otherwise comma. A field may be double-quoted, and a quoted field may contain commas, line breaks and `""` for a literal quote. Line breaks inside the description are shown in the app. Rows are displayed in file order. Rows with an empty `navn` are skipped.
 
-Because the service worker fetches this file network-first, changing only the CSV does not require a cache bump. The repo is served publicly from GitHub Pages, so keep the contents non-sensitive.
+Because the service worker fetches this file network-first with `cache: 'no-cache'` (bypassing the browser HTTP cache, since Pages sends `max-age=600`), changing only the CSV does not require a cache bump. The Pages CDN may still serve the old file for up to ten minutes after a push. The repo is served publicly from GitHub Pages, so keep the contents non-sensitive.
 
 ## Service worker cache versioning
 
-`CACHE_NAME` in `sw.js` (currently `passord-v5`) must be bumped whenever any cached code asset changes (HTML, CSS, JS, manifest, icons). Those are served cache-first, so without a bump installed clients keep serving the old files. The activate handler deletes all caches whose name differs from `CACHE_NAME`. If you add a new static asset, also add it to `urlsToCache`. Test files are not cached and not loaded by `index.html`.
+`CACHE_NAME` in `sw.js` (currently `passord-v6`) must be bumped whenever any cached code asset changes (HTML, CSS, JS, manifest, icons). Those are served cache-first, so without a bump installed clients keep serving the old files. The activate handler deletes all caches whose name differs from `CACHE_NAME`. If you add a new static asset, also add it to `urlsToCache`. Test files are not cached and not loaded by `index.html`.
